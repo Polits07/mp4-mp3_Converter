@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CleanAudio — convert any video or audio file to MP3</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true"></div>
+
+<div class="wrap">
+
+  <nav class="nav">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 10v4M7 6v12M11 3v18M15 6v12M19 10v4"/></svg>
+      <span class="logo-word">Clean<b>Audio</b></span>
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-pill active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Home</a>
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#features" class="nav-link">Features</a>
+      
+    </div>
+    <div class="nav-right">
+      <button class="icon-btn" aria-label="Toggle theme"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg></button>
+      <span class="free-badge"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z"/></svg>100% Free</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 10v4M6 6v12M10 3v18M14 6v12M18 10v4"/></svg>MP3 Workbench</div>
+      <h1>Pull the audio out of<br>any file, <span>right here.</span></h1>
+      <p>Drop in a video or audio file and get back a clean MP3. Everything runs in your browser — nothing is uploaded to a server, so there's no wait and nothing to worry about privacy-wise.</p>
+    </div>
+    <div class="hero-art">
+      <svg class="wave wave-left" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 20 8 20 12 6 17 34 22 20 30 20 34 10 39 30 44 20 52 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="file-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+        <span class="tag">MP3</span>
+      </div>
+      <svg class="wave wave-right" viewBox="0 0 100 40" preserveAspectRatio="none"><path d="M0 20 8 20 12 6 17 34 22 20 30 20 34 10 39 30 44 20 52 20" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="privacy-badge">
+        <div class="privacy-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <span>Your files.<br>Your privacy.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reserved for your AdSense leaderboard unit. Paste your <ins class="adsbygoogle">... code inside this div. -->
+  <div class="ad-slot"></div>
+
+  <section class="card converter">
+    <div id="drop">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 18a4 4 0 01-1-7.87A5 5 0 0116 8a4.5 4.5 0 011 8.9"/><path d="M12 12v7M9 15l3-3 3 3"/></svg>
+      <div class="big">Drop a file here, or click to choose one</div>
+      <div class="small">MP4, MOV, MKV, WAV, M4A, AAC, FLAC and most others work</div>
+      <button type="button" class="choose-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V7z"/></svg>Choose File</button>
+    </div>
+    <input type="file" id="fileInput" accept="video/*,audio/*">
+
+    <div id="afterPick" style="display:none;">
+      <div class="file-row">
+        <div>
+          <div class="name" id="fileName"></div>
+          <button class="change-link" id="changeBtn">choose a different file</button>
+        </div>
+        <div class="size" id="fileSize"></div>
+      </div>
+
+      <div class="settings">
+        <label>Quality</label>
+        <div class="pills">
+          <button type="button" class="pill" data-color="teal" data-value="128k">128 kbps · smaller</button>
+          <button type="button" class="pill active" data-color="violet" data-value="192k">192 kbps · standard</button>
+          <button type="button" class="pill" data-color="pink" data-value="320k">320 kbps · best</button>
+        </div>
+      </div>
+
+      <button class="primary" id="convertBtn">Convert to MP3</button>
+
+      <div class="progress-wrap" id="progressWrap" style="display:none;">
+        <div class="progress-label"><span id="progressText">Loading converter…</span><span id="progressPct">0%</span></div>
+        <div class="bar-track"><div class="bar-fill" id="barFill"></div></div>
+      </div>
+
+      <div class="result" id="result" style="display:none;">
+        <div class="status">✓ Done — your MP3 is ready</div>
+        <a class="download" id="downloadLink" download>Download MP3</a>
+      </div>
+
+      <div class="error" id="errorBox" style="display:none;"></div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="feature">
+      <div class="f-icon violet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></div>
+      <h3>Fast &amp; Simple</h3>
+      <p>Get your MP3 in seconds, no complicated steps.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg></div>
+      <h3>100% Private</h3>
+      <p>Your files never leave your browser.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3>Works Everywhere</h3>
+      <p>Runs on any modern browser, no installation needed.</p>
+    </div>
+    <div class="feature">
+      <div class="f-icon pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div>
+      <h3>Multiple Formats</h3>
+      <p>Supports MP4, MOV, MKV, WAV, M4A, AAC, FLAC and more.</p>
+    </div>
+  </section>
+
+  <div class="how" id="how">
+    <div class="how-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 00-4 10.5c.5.5 1 1.2 1 2.5h6c0-1.3.5-2 1-2.5A6 6 0 0012 3z"/></svg></div>
+    <p><strong>How this works:</strong> your file is decoded and re-encoded locally in your browser using a WebAssembly build of FFmpeg. It never leaves your device. Larger files and longer videos take longer since your own device is doing the work — there's no server queue, but there's no server shortcut either.</p>
+  </div>
+
+  <!-- Reserved for your AdSense rectangle unit -->
+  <div class="ad-slot rectangle"></div>
+
+  <footer>
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 10v4M7 6v12M11 3v18M15 6v12M19 10v4"/></svg>
+      <span class="logo-word">Clean<b>Audio</b></span>
+    </div>
+    <span class="tagline">Simple. Fast. Private.</span>
+    <span class="footnote"> No file size is stored or logged.</span>
+  </footer>
+
+</div>
+
+<div class="modal-overlay" id="adModal" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-head">
+      <span>Getting your converter ready</span>
+      <button type="button" class="modal-close" id="adModalClose" aria-label="Continue to conversion">✕</button>
+    </div>
+    <!-- Reserved for your AdSense unit shown at convert time (e.g. 300x250). Paste your <ins class="adsbygoogle">... code inside this div. -->
+    <div class="ad-slot rectangle modal-ad-slot"></div>
+    <button type="button" class="primary" id="adContinueBtn">Continue to conversion</button>
+  </div>
+</div>
+
+<!--
+  DEV NOTE (not shown to visitors):
+  If you're testing this on your own machine, don't open index.html by double-clicking it.
+  The converter needs a real web server. Run one of these in this folder, then open the
+  http://localhost address it gives you:
+    npx serve .
+    python3 -m http.server
+  It works normally once deployed to Vercel, Netlify, or GitHub Pages — no setup needed there.
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
